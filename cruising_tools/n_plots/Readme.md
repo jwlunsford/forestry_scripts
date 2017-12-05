@@ -54,8 +54,8 @@ After installing Python, follow these steps.
 4.  Run the script.
 	
 	From the command-line run the script using the python command.  *Make sure you are still in the n_plots directory.  This would be the same command in Mac Terminal*
-		Windows command >: `python n_plots.py`
-		Mac command $: `python n_plots.py`
+	* Windows command >: `python n_plots.py`
+	* Mac command $: `python n_plots.py`
 		
 5.  If no errors occur, the script will prompt you for input ('Your desired Sampling Error').
 
@@ -63,9 +63,9 @@ After installing Python, follow these steps.
 
 
 ## Created By:
-Jon W. Lunsford - Springwood Software
-December 5, 2017
-jon.lunsford@outlook.com
+* Jon W. Lunsford - Springwood Software
+* December 5, 2017
+* jon.lunsford@outlook.com
 
 
 		
