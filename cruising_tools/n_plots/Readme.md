@@ -37,12 +37,13 @@ After installing Python, follow these steps.
 2.  To run the python scripts, you will need to open a command prompt and navigate to the directory
 	where you extracted the files.
 	
-	On Windows:  Assuming you extracted the files to the C:\forestry_scripts directory.  At the C:\<your user name> type the following:
-		C:\... > cd C:\forestry_scripts\cruising_tools\n_plots
+	On Windows:  Assuming you extracted the files to the C:\forestry_scripts directory.  At the command
+	prompt type the following:
+		> `cd C:\forestry_scripts\cruising_tools\n_plots`
 			
 	On Mac/Unix:  Assuming you extracted the files to your Documents folder.  At the Terminal prompt type
 	the following:
-		... $ cd ~/Documents/cruising_tools\n_plots
+		$ `cd ~/Documents/cruising_tools\n_plots`
 			
 3.  Enter your stratum data.
 
