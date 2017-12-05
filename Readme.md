@@ -8,8 +8,8 @@ https://www.python.org/downloads/
 ## Created By:
 These scripts are provided under the MIT License, which means they are provided, "AS IS" and you are free to use them for any purpose as long as you provide attribution.
 
-Created By:  	Springwood Software
-Date:			December 5, 2017
-Contact:		jon.lunsford@outlook.com
+* Created By:  	Springwood Software
+* Date:			December 5, 2017
+* Contact:		jon.lunsford@outlook.com
 
 
