@@ -15,10 +15,12 @@ Stratum | Timber_Type_Desc | Est_Vol_Ac | Acres | Est_CSV
 
 data.csv:
 
+```text
 Stratum, Timber_Type_Desc, Est_Vol_Ac, Acres, Est_CSV
 1, Pre-Merch Planted, 28, 20, 25
 2, Mixed, 30, 35, 80
 3, Merch Planted, 45, 45, 20
+```
 
 ## How to Run the Script:
 You will need a recent version of Python (v.3.x) installed on your local machine to run this script.
