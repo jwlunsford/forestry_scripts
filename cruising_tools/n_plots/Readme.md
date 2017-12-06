@@ -26,46 +26,28 @@ Stratum, Timber_Type_Desc, Est_Vol_Ac, Acres, Est_CSV
 You will need a recent version of Python (v.3.x) installed on your local machine to run this script.
 After installing Python, follow these steps.
 
-1.  Download and extract the script files.
+1.  Download n_plots.py from this repository.
 	
-	In a browser type the following address.
-		https://github.com/jwlunsford/forestry_scripts.git
-	
-	
-	Download the files as a Zip package.  Save and extract the files to your local machine.
-	
-2.  To run the python scripts, you will need to open a command prompt and navigate to the directory
-	where you extracted the files.
-	
-	On Windows:  Assuming you extracted the files to the C:\forestry_scripts directory.  At the command
-	prompt type the following:
-		> `cd C:\forestry_scripts\cruising_tools\n_plots`
-			
-	On Mac/Unix:  Assuming you extracted the files to your Documents folder.  At the Terminal prompt type
-	the following:
-		$ `cd ~/Documents/cruising_tools\n_plots`
+2.  Navigate to the directory where the local 'n_plots.py' file is stored.
 			
 3.  Enter your stratum data.
 
-	Using Windows Explorer, or Finder (Mac), open the 'data.csv' file in the n_plots folder.  You can open
-	the file using a plain text editor such as Notepad, or using MS Excel.  *If you open using Excel, make
-	sure you re-save the file as a comma-separated, file (.csv).  Enter your data.
+	Using File Explorer or MS Excel, open the 'data.csv' file in the n_plots folder.  Enter your
+	data and save the file. 
+	*If you open using Excel, make sure you re-save the file as a comma-separated, file (.csv) when you 	are finished editing, and do not change the filename.*
 	
-4.  Run the script.
-	
-	From the command-line run the script using the python command.  *Make sure you are still in the n_plots directory.  This would be the same command in Mac Terminal*
-	* Windows command >: `python n_plots.py`
-	* Mac command $: `python n_plots.py`
+4.  Enter the following command at the prompt... `python n_plots.py`
 		
-5.  If no errors occur, the script will prompt you for input ('Your desired Sampling Error').
+5.  If no errors occur, the script will ask you for input ('Your desired Sampling Error').
 
-6.  Type the input for Sampling Error and press Enter.  Your results will be displayed on the screen.
+6.  After entering the desired sampling error, press enter.  Your results will be displayed on the screen.
 
 
 ## Created By:
-* Jon W. Lunsford - Springwood Software
-* December 5, 2017
-* jon.lunsford@outlook.com
+* Created By:    Springwood Software
+* Date:          December 5, 2017
+* Email:         jon.lunsford@outlook.com
+* License:       MIT
 
 
 		

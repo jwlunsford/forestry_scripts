@@ -10,6 +10,7 @@ These scripts are provided under the MIT License, which means they are provided,
 
 * Created By:  	Springwood Software
 * Date:			December 5, 2017
-* Contact:		jon.lunsford@outlook.com
+* Email:		jon.lunsford@outlook.com
+* License:      MIT
 
 
