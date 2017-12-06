@@ -2,7 +2,7 @@
 This script contains three functions.
 
 1.  An annual simple growth rate calculator.
-	This calculates the annual growth rate using the simple interest formaula.  Values can be in
+	This calculates the annual growth rate using the simple interest formula.  Values can be in
 	any format as long as they are numeric (e.g.; dollars, tree diameter inside bark, yields/acre, etc.)
 	
 2.  A future yield calculator.
