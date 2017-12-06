@@ -7,7 +7,7 @@ added to a data.csv (comma-separated file) and the script does the rest.  The da
 contain multiple rows, but the column headings and order should not be changed.  Below is a table
 showing sample data in the data.csv file, and how it should be represented in the file:
 
-Stratum | Timber_Type_Desc | Est_Vol_Ac | Acres | Est_CSV
+Stratum | Timber_Type_Desc | Est_Vol_Ac | Acres | Est_CV
 ------- | ---------------- | ---------- | ----- | -------
 1		| Pre-Merch Planted| 28			| 20	| 25
 2		| Mixed			   | 30			| 35	| 80
@@ -16,7 +16,7 @@ Stratum | Timber_Type_Desc | Est_Vol_Ac | Acres | Est_CSV
 data.csv:
 
 ```text
-Stratum, Timber_Type_Desc, Est_Vol_Ac, Acres, Est_CSV
+Stratum, Timber_Type_Desc, Est_Vol_Ac, Acres, Est_CV
 1, Pre-Merch Planted, 28, 20, 25
 2, Mixed, 30, 35, 80
 3, Merch Planted, 45, 45, 20
