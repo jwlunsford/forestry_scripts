@@ -1,4 +1,4 @@
-#!/user/bin/env python 
+#!/usr/bin/env python 
 import math
 import sys
 
@@ -41,13 +41,13 @@ if __name__ == '__main__':
             print("This tool calculates the Annual Simple Growth rate of "
                 "forest yields.")
             print("- " * 20)
-            yield1 = input("Enter the Yield (e.g.; tons/acre) at time 1 > ")
-            yield2 = input("Enter the Yield (e.g.; tons/acre) at time 2 > ")
+            yield1 = input("Enter the Current Yield or Value (t=1) > ")
+            yield2 = input("Enter the Future Yield or Value (t=2) > ")
             if yield2 < yield1:
-                print("Yield at time 2 cannot be less than yield at time 1.")
-                yield2 = input("Enter the Yield at time 2 > ")
-            period_length = input("Enter the number of years from time 1 to "
-                "time 2 > ")
+                print("Future yield/value cannot be less than current yield/value.")
+                yield2 = input("Enter the Future Yield or Value (t=2) > ")
+            period_length = input("Enter the period (in years) "
+                "to evaluate > ")
             simple_growth = annual_simple_growth(float(yield1), float(yield2),
                                                  float(period_length))
             print("\n")
@@ -61,10 +61,10 @@ if __name__ == '__main__':
             print("This tool estimates the future yield of forest stands, "
                 "given the, current yield and annual growth rate.")
             print("- " * 20)
-            yield1 = input("Enter the current Yield (e.g.; tons/acre) > ")
-            ag_rate = input("Enter the simple annual growth rate: ")
+            yield1 = input("Enter the current Yield or Value > ")
+            ag_rate = input("Enter the simple Annual Growth rate: ")
             period_length = input("How many years into the future do you "
-                 "want to include? > ")
+                 "want to evaluate? > ")
             future_yield = calc_future_yield(float(yield1), float(ag_rate),
                                              float(period_length))
             print("\n")
@@ -82,7 +82,7 @@ if __name__ == '__main__':
                 "tons, diameter, etc.) > ")
             future_val = input("Enter the future value. > ")
             period_length = input("How many years into the future do you " 
-                "want to include? > ")
+                "want to evaluate? > ")
             compound_growth = annual_compound_growth(float(future_val),
                                                      float(cur_val),
                                                      float(period_length))

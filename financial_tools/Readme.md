@@ -5,6 +5,16 @@ This script contains three functions.
 	This calculates the annual growth rate using the simple interest formula.  Values can be in
 	any format as long as they are numeric (e.g.; dollars, tree diameter inside bark, yields/acre, etc.)
 	
+	Example: When to harvest?  If the average annual growth rate exceeds your alternative rate of return, then hold.  Otherwise, harvest.
+	
+	```text
+	Current stumpage value/acre = $1800
+	Future (expected) stumpage value/acre = $2500
+	Ratio of future to present value = 1.4
+	Evaluation Period = 5 years
+	Rate of Return = ((1.4)^1/5) - 1) x 100 = 7%
+	```
+	
 2.  A future yield calculator.
 	Given the rate of simple interest and current yield, this calculates the future yield.
 	
