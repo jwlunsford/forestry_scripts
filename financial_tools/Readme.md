@@ -1,4 +1,4 @@
-# Yields.py
+# Rate_of_Growth.py
 This script contains three functions.
 
 1.  An annual simple growth rate calculator.
