@@ -24,9 +24,9 @@ This script contains three functions.
 	tree diameters, yields/acre, etc.)
 	
 # Forest_Finance.py
-This script contains one function - calc_lev().
+This script contains one function at this time.  This function is used to calculate the Land Expectation Value (i.e.; net present value of an infinite series of identical forest rotations).  LEV is useful for land valuation purposes and for establishing an optimal rotation length.
 
-1.  calc_lev() - calculates the Land Expectation Value of a managed stand using cost and revenue
+1.  calc_lev() - calculates the Land Expectation Value of a managed forest using cost and revenue
     data supplied by the user.  Costs may include establishment, intermediate treatments, and annual expenses.  Revenues may include funds from thinning, harvest, and leases.
 	
 2.  Use the provided CSV file to enter an itemized list of costs and revenues.  This file should be named lev_data.csv and needs to be in the current directory where the script is executed.  Below is an example of the CSV file.
