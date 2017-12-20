@@ -1,4 +1,4 @@
-# Cruising Tools:  n_plots.py
+# Cruising Tools:  tcruise
 
 ## Description:
 tcruise is a Python package that contains modules to workup timber cruises.
