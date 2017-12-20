@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import math
 import numpy as np
 
 
@@ -27,14 +26,14 @@ def pmrc_lcp_tons(dbh, totHt, mTop=3.0):
     # model constants, and calculated exponents
     const1 = 0.0740959
     const2 = 0.123329
-    exp1 = math.pow(dbh, PARAM_A)
-    exp2 = math.pow(totHt, PARAM_B)
-    exp3 = math.pow(mTop, PARAM_C)
-    exp4 = math.pow(dbh, PARAM_D)
+    exp1 = np.power(dbh, PARAM_A)
+    exp2 = np.power(totHt, PARAM_B)
+    exp3 = np.power(mTop, PARAM_C)
+    exp4 = np.power(dbh, PARAM_D)
 
     # calculate and return green tons
-    return ((const1 * exp1 * exp2) - (const2 * (exp3 / exp4) * (totHt - 4.5)))
-        / 2000
+    return ((const1 * exp1 * exp2) - (const2 * (exp3 / exp4) * 
+        (totHt - 4.5))) / 2000
 
 
 def pmrc_ucp_tons(dbh, totHt, mTop=3.0):
@@ -56,14 +55,14 @@ def pmrc_ucp_tons(dbh, totHt, mTop=3.0):
     # model constants, and calculated exponents
     const1 = 0.141534
     const2 = 0.0932063
-    exp1 = math.pow(dbh, PARAM_A)
-    exp2 = math.pow(totHt, PARAM_B)
-    exp3 = math.pow(mTop, PARAM_C)
-    exp4 = math.pow(dbh, PARAM_D)
+    exp1 = np.power(dbh, PARAM_A)
+    exp2 = np.power(totHt, PARAM_B)
+    exp3 = np.power(mTop, PARAM_C)
+    exp4 = np.power(dbh, PARAM_D)
 
     # calculate and return green tons
-    return ((const1 * exp1 * exp2) - (const2 * (exp3 / exp4) * (totHt - 4.5)))
-        / 2000
+    return ((const1 * exp1 * exp2) - (const2 * (exp3 / exp4) * 
+        (totHt - 4.5))) / 2000
     
 
 def baldwin_stem_tons(dbh, totHt, age=15, thinned=True, top=3.0):
@@ -86,7 +85,7 @@ def baldwin_stem_tons(dbh, totHt, age=15, thinned=True, top=3.0):
     # calculated exponents
     expr1 = np.log(dbh)
     expr2 = np.log(totHt)
-    expr3 = math.pow(age, 2)
+    expr3 = np.power(age, 2)
     
     # check for thinned stands, thinning has influence on merchantable ratio
     if thinned:
@@ -120,8 +119,8 @@ def baldwin_merch_ratio_unthinned(dbh, mTop=3.0):
     PARAM_3 = 4.723876
     
     # calculated exponents
-    expr1 = math.pow(mTop, PARAM_2)
-    expr2 = math.pow(dbh, PARAM_3)
+    expr1 = np.power(mTop, PARAM_2)
+    expr2 = np.power(dbh, PARAM_3)
 
     # return merchantable ratio
     return math.exp(PARAM_1 * (expr1 / expr2))
@@ -145,8 +144,8 @@ def baldwin_merch_ratio_thinned(dbh, mTop=3.0):
     PARAM_3 = 5.170415
     
     # calculated exponents
-    expr1 = math.pow(mTop, PARAM_2)
-    expr2 = math.pow(dbh, PARAM_3)
+    expr1 = np.power(mTop, PARAM_2)
+    expr2 = np.power(dbh, PARAM_3)
 
     # return merchantable ratio
     return math.exp(PARAM_1 * (expr1 / expr2))
