@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import numpy as np
 
 
@@ -63,3 +62,8 @@ def pmrc_ucp_tons(dbh, totHt, mTop=3.0):
     # calculate and return green tons
     return ((const1 * exp1 * exp2) - (const2 * (exp3 / exp4) * 
         (totHt - 4.5))) / 2000
+        
+
+if __name__ == '__main__':
+    print("Running pmrc")
+    

@@ -2,10 +2,15 @@
 import pandas as pd
 import numpy as np
 import sys
-from pmrc import pmrc_ucp_tons
+from .yield_eqs.pmrc import pmrc_ucp_tons, pmrc_lcp_tons
 
-'''This module does a simple point sample workup.  Plot data are read from a
-   CSV file and calculations are done using a Pandas DataFrame object.   
+'''This module calculates variable radius point sampling cruise data.
+   Point data are input into a CSV file in the local directory and 
+   calculations are done using NumPy and Pandas modules.  The default
+   basal area factor is 10.
+
+   Volume equations are currently set to use pmrc_ucp_tons, but this can be
+   changed in the code below on line 54.
 '''
 
 class PointSample:
@@ -15,11 +20,14 @@ class PointSample:
                 
     
     def run(self):
+        # get the baf from the user
+        baf = int(input("What is the Basal Area Factor? > "))
+        
         # run the calculations and display the results
         raw_df = self._gen_df(self.path)
-        calc_df = self._calc_data(raw_df)
-        output = self._sum_data(calc_df)
-        return output        
+        calc_df = self._calc_data(raw_df, baf)
+        output = self._sum_data(calc_df) 
+        return output
         
     
     def _gen_df(self, path_to_csv):
@@ -32,7 +40,7 @@ class PointSample:
             sys.exit(1)
     
 
-    def _calc_data(self, raw_df):
+    def _calc_data(self, raw_df, baf=10):
         # accepts a newly created dataframe from the csv data and
         # appends additional values to the dataframe
         try:
@@ -43,7 +51,7 @@ class PointSample:
                 
             # create new data columns on the raw dataframe
             raw_df.insert(6, "BAT", np.power(raw_df.DBH, 2) * 0.00545415) #BArea
-            raw_df.insert(7, "PAE", (10/raw_df.BAT))  # Per Acre Expansion
+            raw_df.insert(7, "PAE", (baf/raw_df.BAT))  # Per Acre Expansion
             raw_df.insert(8, "TPA", raw_df.PAE/plot_count)  # Trees per Acre
             raw_df.insert(9, "VOL", pmrc_ucp_tons(raw_df.DBH, raw_df.THT)) # Volume/T
             raw_df.insert(10, "VPA", raw_df.VOL * raw_df.TPA) # Volume per Acre
@@ -56,10 +64,7 @@ class PointSample:
                 " If this is your intention, then allow_duplicates=True"
                 " should be added to the DataFrame insert() method.")
             sys.exit(1)
-        except:
-            # syst.exc_info returns the tuple (type, value, traceback)
-            print("Unexpected error in calc_data():", sys.exc_info()[0])
-            sys.exit(1)
+        
         
 
     def _sum_data(self, df):
@@ -70,14 +75,12 @@ class PointSample:
             grp = grp[["VPA", "TPA", "BAPA"]]  # show only these columns
             return grp
         except:
-            # sys.exc_info returns the tuple (type, value, traceback)
-            print("Unexpected error in sum_data():", sys.exc_info()[0]) 
-            sys.exit(1)
+            pass
             
 
 if __name__ == '__main__':
     # create  a PointSample class, run the calculations and print results
-    output = PointSample(sys.argv[1]).run()
+    PointSample(sys.argv[1]).run()
     print("\n {} \n".format(output))
     
         
