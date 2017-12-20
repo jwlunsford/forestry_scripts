@@ -36,10 +36,15 @@ class PointSample:
         # accepts a newly created dataframe from the csv data and
         # appends additional values to the dataframe
         try:
+            # determine the number of unique plots
+            plot_count = 0
+            for n in raw_df.PLT.unique():
+                plot_count += 1
+                
             # create new data columns on the raw dataframe
             raw_df.insert(6, "BAT", np.power(raw_df.DBH, 2) * 0.00545415) #BArea
             raw_df.insert(7, "PAE", (10/raw_df.BAT))  # Per Acre Expansion
-            raw_df.insert(8, "TPA", raw_df.PAE/4)  # Trees per Acre
+            raw_df.insert(8, "TPA", raw_df.PAE/plot_count)  # Trees per Acre
             raw_df.insert(9, "VOL", pmrc_ucp_tons(raw_df.DBH, raw_df.THT)) # Volume/T
             raw_df.insert(10, "VPA", raw_df.VOL * raw_df.TPA) # Volume per Acre
             raw_df.insert(11, "BAPA", raw_df.BAT * raw_df.TPA) # Basal Area per Acre
