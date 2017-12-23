@@ -1,7 +1,7 @@
 # Cruising Tools:  tcruise
 
 ## Description:
-tcruise is a Python package that contains modules to workup timber cruises.
+SWS tcruise is a Python package that contains modules to workup timber cruises.
 The current version of the package contains a module for variable radius
 plots only.  The plan is to include modules for fixed radius plots later.
 
@@ -22,24 +22,27 @@ STD | PLT | SPP | PRD | DBH | THT
 
 
 
-## How to Run the Script:
-You will need a recent version of Python (v.3.x) installed on your local machine to run this script.
+## How to use tcruise:
+You will need a recent version of Python (3.x) installed on your local machine to use this tool.
 The scripts require current versions of NumPy and Pandas libraries.  You can pip install these.
 
 1.  Clone the repository
-2.  Open a shell (Terminal on Mac, cmd.exe on Windows)
-2.  Navigate to the directory where you saved the files.
-3.  Start Python from the command prompt.
-4.  Import PointSample from the package using.
-	```python
-	   >>> from tcruise import PointSample
-	```
-5.  Create a PointSample instance and run the calcs.
-	```python
-	   >>> ps = PointSample('relative path to pt_data.csv').run()
-	   >>> ps
-	   	     OUTPUT WILL APPEAR HERE
-	```
+2.  Open a command prompt (Terminal on Mac, cmd.exe on Windows).
+2.  Navigate to the directory where the tcruise package is located.
+3.  Start Python in interactive mode from the command prompt.
+
+
+Sample of how to create a PointSample object, and display volume, basal area, trees per acre and stats.
+Assuming that the tcruise package is stored in the Documents directory (Mac or Windows), and Python is
+running from this directory.
+
+```python
+>>> from tcruise import PointSample
+>>> ps = PointSample('tcruise/pt_data.csv')  # create a PointSample instance
+>>> ps.run()   								 # run the calculations
+>>> ps.stats()								 # view the volume statistics
+```
+
 
 
 ## Created By:
