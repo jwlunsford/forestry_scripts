@@ -19,9 +19,11 @@ class PointSample:
         self.path = path
         self.dframes = {}
         self.plots = 0
+        self.means = []
+        self.stats = []
                 
     
-    def run(self):
+    def dope_out(self):
         # get the baf from the user
         baf = int(input("What is the Basal Area Factor? > "))
         
@@ -29,22 +31,25 @@ class PointSample:
         self._gen_df(self.path)
         self._calc_data(self.dframes["raw_df"], baf)
         self._sum_data(self.dframes["calc_df"])
+        self._calc_stats(self.dframes["calc_df"])
         
-        # print the result
-        print("Summary by Species and Product ....\n")        
-        print("{} \n".format(self.dframes["out_df"]))
-        
+        self.display()        
         
                 
-    def stats(self):
-        # calculate and return the stats, pass in the calc_df
-        stats = self._calc_stats(self.dframes["calc_df"])
+    def display(self):
+        # display the means
+        print("Stocking by Species and Product (per acre) .... \n")
+        for row in self.means:
+            print("SPP: {0},  PRD: {1},  TPA: {2:6.2f},  BA: {3:5.2f},  VOL: {4:8.2f}".
+                format(row[0], row[1], row[2], row[3], row[4]))
         
-        # loop over the dictionary and print the stats
+        # print new line
+        print("\n")
+        
+        # display the stats
         print("Per acre Stats ....\n")
-        for key, value in stats:
-            print("{0:<18s}: {1:6.2f}".format(key, value))
-        print('\n')
+        for label, value in self.stats:
+            print("{0:<18s}: {1:6.2f}".format(label, value))
               
     
     def _gen_df(self, path_to_csv):
@@ -84,7 +89,8 @@ class PointSample:
             calc_df.insert(9, "VOL", pmrc_ucp_tons(calc_df.DBH, calc_df.THT))
             calc_df.insert(10, "VPA", calc_df.VOL * calc_df.TPA)
             calc_df.insert(11, "BAPA", baf)
-               
+            
+            # store the calc dataframe in self.dframes dict  
             self.dframes["calc_df"] = calc_df
             
         except ValueError:       
@@ -106,7 +112,24 @@ class PointSample:
             grp = out_df[["SPP", "PRD", "TPA", "VPA","BAPA"]].groupby(
                 ["SPP", "PRD"]).sum()/self.plots
             
-            self.dframes["out_df"] = grp
+            # create a summary dict of values SPP, PRD, TPA, VPA, BAPA
+            # for each species-product combination.
+            grp_means = []  # will hold means in a tuple
+            for index, row in grp.iterrows():
+                grp_spp = index[0]
+                grp_prd = index[1]
+                grp_tpa = row["TPA"]
+                grp_ba = row["BAPA"]
+                grp_vol = row["VPA"]
+                grp_means.append(
+                    (grp_spp, grp_prd, grp_tpa, grp_ba, grp_vol))            
+            
+            # store grp_means in the means attribute
+            self.means = grp_means
+            
+            # store the dataframe in self.dframes dict
+            self.dframes["out_df"] = grp            
+            
         except:
             pass
             
@@ -169,13 +192,14 @@ class PointSample:
         ci_upper = meanX + std_error * t
         ci_lower = meanX - std_error * t
         
-        # return Dict
-        stats = [("Trees/Acre", t_TPA), ("Basal Area/Acre", t_BA),
-                 ("Mean Tons", meanX), ("Upper Tons", ci_upper),
-                 ("Lower Tons", ci_lower), ("Std. Deviation", std),
-                 ("Std. Error", std_error), ("CV%", cv_pct),
-                 ("Sampling Error", smp_error)]
-        return stats
+        # return values in a List of tuples
+        stat_list = [("Trees/Acre", t_TPA), ("Basal Area/Acre", t_BA),
+                     ("Mean Tons", meanX), ("Upper Tons", ci_upper),
+                     ("Lower Tons", ci_lower), ("Std. Deviation", std),
+                     ("Std. Error", std_error), ("CV%", cv_pct),
+                     ("Sampling Error", smp_error)]
+        
+        self.stats = stat_list
         
           
 
