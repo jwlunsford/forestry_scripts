@@ -41,9 +41,7 @@ on your machine is 'C:\path\tcruise', then the Python REPL should be run from th
 ```python
 >>> from tcruise import PointSample
 >>> ps = PointSample('tcruise/pt_data.csv')  # create a PointSample instance
->>> ps.run()   								 # run the calculations
->>> ps.stats()								 # view the volume statistics
-```
+>>> ps.dope_out()							 # run the calculations
 
 
 
