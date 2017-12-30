@@ -42,6 +42,26 @@ on your machine is 'C:\path\tcruise', then the Python REPL should be run from th
 >>> from tcruise import PointSample
 >>> ps = PointSample('pycruise/pt_data.csv')  # create a PointSample instance
 >>> ps.dope_out()							 # run the calculations
+	What is the basal area factor? > 10
+	
+	Stocking by Species and Product (per acre) ...
+	SPP: 1, PRD: 1, TPA: 15.79, BA: 5.00,  VOL: 3.30
+	SPP: 1, PRD: 2, TPA: 38.54, BA: 23.33, VOL: 20.20
+	SPP: 1, PRD: 3, TPA: 45.31, BA: 41.67, VOL: 37.95
+	
+	Per acre Stats ....
+	
+	Trees/Acre		: 99.63
+	Basal Area/Acre : 70.00
+	Mean Tons		: 61.45
+	Upper Tons		: 73.76
+	Lower Tons		: 49.14
+	Std. Deviation	: 11.73
+	Std. Error		: 4.79
+	CV%				: 19.08
+	Sampling Error	: 20.03
+	
+```
 
 
 
