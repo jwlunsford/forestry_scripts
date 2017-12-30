@@ -33,8 +33,8 @@ The scripts require current versions of NumPy and Pandas libraries.  You can pip
 
 
 Sample of how to create a PointSample object, and display volume, basal area, trees per acre and stats.
-Assuming that the tcruise package is stored in a local directory, and Python is
-running from this directory.  As a package, tcruise uses relative imports, so the current directory
+Assuming that the PyCruise package is stored in a local directory, and Python is
+running from this directory.  As a package, PyCruise uses relative imports, so the current directory
 needs to contain the top-level directory for the package.  For example if the directory structure
 on your machine is 'C:\path\pycruise', then the Python REPL should be run from the path directory.
 
