@@ -51,15 +51,15 @@ on your machine is 'C:\path\tcruise', then the Python REPL should be run from th
 	
 	Per acre Stats ....
 	
-	Trees/Acre			: 99.63
-	Basal Area/Acre 	: 70.00
-	Mean Tons			: 61.45
-	Upper Tons			: 73.76
-	Lower Tons			: 49.14
-	Std. Deviation		: 11.73
-	Std. Error			: 4.79
-	CV%					: 19.08
-	Sampling Error		: 20.03
+	Trees/Acre : 99.63
+	Basal Area/Acre : 70.00
+	Mean Tons : 61.45
+	Upper Tons : 73.76
+	Lower Tons : 49.14
+	Std. Deviation : 11.73
+	Std. Error : 4.79
+	CV% : 19.08
+	Sampling Error : 20.03
 	
 ```
 
