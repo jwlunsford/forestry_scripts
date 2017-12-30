@@ -38,10 +38,10 @@ running from this directory.  As a package, tcruise uses relative imports, so th
 needs to contain the top-level directory for the package.  For example if the directory structure
 on your machine is 'C:\path\tcruise', then the Python REPL should be run from the path directory.
 
-```python
+```shell
 >>> from tcruise import PointSample
 >>> ps = PointSample('pycruise/pt_data.csv')  # create a PointSample instance
->>> ps.dope_out()							 # run the calculations
+>>> ps.dope_out()							  # run the calculations
 	What is the basal area factor? > 10
 	
 	Stocking by Species and Product (per acre) ...
