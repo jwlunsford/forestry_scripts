@@ -3,9 +3,13 @@
 ## Description:
 Pmrc_si.py is a script that will allows easy Site Index calculations from data collected in the field.
 The current version is only compatible with PMRC-1990 and PMRC 1996 site index equations, but
-others will be added later if needed.  The inputs to these models are dominant height and age.
+others will be added later if needed.  The idea here is that a cruiser is collecting site index
+trees (e.g. one per plot) as they are cruising a planted stand of Loblolly pine timber.  The model
+can be used for pre-merch calculations as well, but below about age 7 they may not be very accurate.
+
+The inputs to these models are dominant height and age.
 Dominant height and age are calculated directly from the data by averaging the values found in the
-companion data file.  Data is entered into plotdata.csv prior to running the tool.
+companion data file.  Data needs to be entered into plotdata.csv prior to running the tool.
 
 Here is a sample of the 'plotdata.csv' file:
 
@@ -15,6 +19,9 @@ AGE | HT | 5YG
 22  | 74 | 1.1
 24  | 79 | 1.2
 22  | 84 | 1.1
+
+The '5YG' field is for 5 year growth increments taken from a core sample.  These values are NOT optional, so
+if you want to exclude growth data then zero out the values in this column.
 
 ## How to use PMRC_SI:
 You will need a recent version of Python (3.x) installed on your local machine.
