@@ -28,7 +28,7 @@ The scripts require current versions of NumPy and Pandas libraries.  You can pip
 
 1.  Clone the repository
 2.  Open a command prompt (Terminal on Mac, cmd.exe on Windows).
-2.  Navigate to the directory where the tcruise package is located.
+2.  Navigate to the directory where the pycruise package is located.
 3.  Start Python in interactive mode from the command prompt.
 
 
@@ -39,7 +39,7 @@ needs to contain the top-level directory for the package.  For example if the di
 on your machine is 'C:\path\pycruise', then the Python REPL should be run from the path directory.
 
 ```
->>> from tcruise import PointSample
+>>> from pycruise import PointSample
 >>> ps = PointSample('pycruise/pt_data.csv')  # create a PointSample instance
 >>> ps.dope_out()							  # run the calculations
 	What is the basal area factor? > 10
