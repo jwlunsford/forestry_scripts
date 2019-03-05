@@ -1,8 +1,8 @@
 AGE,DESC,FREQ,AMT
-0,Ad Valorem Taxes,0,-3
-0,Hunting Revenue,0,1
-0,Stand Establishment,1,-125
-5,Brush Control, 1, -50
-20,Thinning Revenue,1,200
-10,Thinning Cost,1,-75
-40,Final Harvest,1,3000
+0,reforest,1,-125
+5,brush ctrl,1,-50
+10,thin cost,1,-75
+20,thin rev,1,200
+40,harvest,1,3000
+0,tax,0,-3
+0,hunt rev,0,1
