@@ -69,6 +69,9 @@ def harvest():
     pass
 
 
+def test():
+    """Test the weibull parameter recovery functions"""
+
 
 
 def menu_loop():
@@ -76,10 +79,10 @@ def menu_loop():
     choice = True
     while choice:
         print('\n**** Pine Plantation Growth & Yield Prediction System ****\n')
-        print('Choose a scenario by entering the number then hit <Return>')
+        print('  Instr: Choose a scenario by entering the number then press <Return>\n')
         for key, value in menu.items():
-            print('\t{}) {}'.format(key, value.__doc__))
-        choice = input('Scenario: ').lower().strip()
+            print('  {}) {}'.format(key, value.__doc__))
+        choice = input('\nScenario: ').lower().strip()
         if choice in menu:
             menu[choice]()
         else:
@@ -98,7 +101,8 @@ menu = OrderedDict([
                    ('1', one_thin_harvest),
                    ('2', two_thins_harvest),
                    ('3', harvest),
-                   ('4', quit)])
+                   ('4', test),
+                   ('9', quit)])
 
 
 
