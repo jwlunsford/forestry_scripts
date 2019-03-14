@@ -1,8 +1,10 @@
 import numpy as np
 import scipy.optimize as sp
-from collections import OrderedDict
 import math
 import sys
+
+from collections import OrderedDict
+from colored import fg, attr
 
 
 def _solve_weibull(c, p1, pq, p93):
@@ -55,17 +57,17 @@ def _calc_percentiles(age, tpa, height):
 
 
 def one_thin_harvest():
-    """Complete scenario for one thin plus a harvest."""
+    """Scenario for one thin plus a harvest."""
     pass
 
 
 def two_thins_harvest():
-    """Complete scenario for two thins plus a harvest."""
+    """Scenario for two thins plus a harvest."""
     pass
 
 
 def harvest():
-    """Complete scenario for harvest only."""
+    """Scenario for harvest only."""
     pass
 
 
@@ -77,17 +79,23 @@ def test():
 
     # print the results
     # fsolve() finds the root of a nonlinear equation defined by func(x) = 0
-    print("height (SI=75, age=20) = {}".format(ht))
-    print("percentiles = {}, {}, {}".format(p1, pq, p93))
+    print("height (SI=75, age=20) = {0:.1f}".format(ht))
+    print("percentiles = {0:.3f}, {1:.3f}, {2:.3f}".format(p1, pq, p93))
     print(sp.fsolve(_solve_weibull, initial_c_value, args=(p1, pq, p93)))
 
 
 def menu_loop():
     """Program loop with a CLI menu"""
     choice = True
+
+    # print the program header
+    red_bold = fg('red') + attr('bold')
+    reset = attr('reset')
+    print(red_bold + '\n**** Pine Plantation Growth & Yield Prediction System ****' + reset)
+
     while choice:
-        print('\n**** Pine Plantation Growth & Yield Prediction System ****\n')
-        print('  Instr: Choose a scenario by entering the number then press <Return>\n')
+        blue = fg('blue')
+        print(blue + '\n  Instr: Choose a scenario by entering the number then press <Return>\n' + reset)
         for key, value in menu.items():
             print('  {}) {}'.format(key, value.__doc__))
         choice = input('\nScenario: ').lower().strip()
