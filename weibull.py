@@ -71,7 +71,15 @@ def harvest():
 
 def test():
     """Test the weibull parameter recovery functions"""
+    initial_c_value = 3    # initial value needed for the fsolve function
+    ht = _calc_height(si=75, age=20)   # calculate the height from the inputs
+    p1, pq, p93 = _calc_percentiles(age=20, tpa=450, height=ht)  # get the diameter percentiles
 
+    # print the results
+    # fsolve() finds the root of a nonlinear equation defined by func(x) = 0
+    print("height (SI=75, age=20) = {}".format(ht))
+    print("percentiles = {}, {}, {}".format(p1, pq, p93))
+    print(sp.fsolve(_solve_weibull, initial_c_value, args=(p1, pq, p93)))
 
 
 def menu_loop():
@@ -108,16 +116,4 @@ menu = OrderedDict([
 
 if __name__ == '__main__':
     menu_loop()
-
-
-
-    initial_c_value = 3    # initial value needed for the fsolve function
-    ht = _calc_height(si=75, age=20)   # calculate the height from the inputs
-    p1, pq, p93 = _calc_percentiles(15, 450, ht)  # get the diameter percentiles
-
-    # print the results
-    # fsolve() finds the root of a nonlinear equation defined by func(x) = 0
-    print("height = {}".format(ht))
-    print("percentiles = {}, {}, {}".format(p1, pq, p93))
-    print(sp.fsolve(_solve_weibull, initial_c_value, args=(p1, pq, p93)))
 
