@@ -107,8 +107,8 @@ def npv():
 
 def menu_loop():
     """ Program loop with an interactive menu."""
-    choice = None
-    while choice != 'q':
+    choice = True
+    while choice:
         print('\n**** Forest Finance Calcs Menu ****\n')
         print('Choose a model.  Type the model number below and press \'Enter\'')
         for key, value in menu.items():
