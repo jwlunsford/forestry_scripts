@@ -4,6 +4,18 @@ import math
 
 
 def solve_weibull(c, p1, pq, p93):
+    """recover the weibull parameters.
+
+    Args:
+        c  (int)  -  the value we want to find
+        p1 (real) -  the diameter of the 1st percentile
+        pq (real) -  the quadratic mean diameter
+        p93 (real) - the diameter of the 93rd percentile
+
+    Returns:
+        returns the formula to the calling statement.  Intended for use with the scipy optimize functions only, and not as a standalone function.
+    """
+
     a = 0.6 * p1
     b = (p93 - a)/(-math.log(0.07)) ** (1 / c)
 
@@ -11,7 +23,15 @@ def solve_weibull(c, p1, pq, p93):
 
 
 def calc_height(si, age):
-    """calculate height of doms using site index ba=25 value"""
+    """calculate height of doms using site index ba=25 value
+
+    Args:
+        si (int)  - expected site index value for the timber stand
+        age (int) - age of the timber stand in years
+
+    Returns:
+        a tuple of values for the diameters at the first and ninty-third percentiles, as well as the quadratic mean diameter.
+    """
     return si * (2.14915 * (1 - math.exp(-0.025042 * age))) ** (0.755862)
 
 
