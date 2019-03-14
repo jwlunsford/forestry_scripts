@@ -30,12 +30,22 @@ def calc_height(si, age):
         age (int) - age of the timber stand in years
 
     Returns:
-        a tuple of values for the diameters at the first and ninty-third percentiles, as well as the quadratic mean diameter.
+        the tree height in feet
     """
     return si * (2.14915 * (1 - math.exp(-0.025042 * age))) ** (0.755862)
 
 
 def calc_percentiles(age, tpa, height):
+    """calculate the diameter percentiles.
+
+    Args:
+        age (int) - age of the timber stand in years
+        tpa (int) - the trees per acre (current stocking)
+        height (real) - estimated or measured height of the dominant trees, which can be entered directly or calcualted via calc_height.
+
+    Returns:
+        a tuple of values representing the diameters at the first and ninty-third percentiles, as well as the quadratic mean diameter.
+    """
     p1 = 2.14462 * (height ** 0.70266) * (tpa ** -0.36282) * math.exp(-1.96895 / age)
     pq = 2.14462 * (height ** 0.70266) * (tpa ** -0.25968) * math.exp(0.45967 / age)
     p93 = 2.24213 * (height ** 0.71401) * (tpa ** -0.22932) * math.exp(0.45967 / age)
