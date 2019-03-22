@@ -24,7 +24,7 @@ class PointSample:
         self.stats = []
 
 
-    def dope_out(self):
+    def calculate(self):
         # get the baf from the user
         baf = int(input("What is the Basal Area Factor? > "))
 
