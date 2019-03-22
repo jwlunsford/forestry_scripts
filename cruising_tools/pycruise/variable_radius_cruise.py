@@ -41,7 +41,7 @@ class PointSample:
         # display the means
         print("Stocking by Species and Product (per acre) .... \n")
         for row in self.means:
-            print("SPP: {0},  PRD: {1},  TPA: {2:6.2f},  BA: {3:5.2f},  VOL: {4:8.2f}".
+            print("SPP: {0},  PRD: {1},  TPA: {2:6.2f},  BA: {3:5.2f},  TONS: {4:8.2f}".
                 format(row[0], row[1], row[2], row[3], row[4]))
 
         # print new line
