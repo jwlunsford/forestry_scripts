@@ -34,10 +34,10 @@ class PointSample:
         self._sum_data(self.dframes["calc_df"])
         self._calc_stats(self.dframes["calc_df"])
 
-        self.display()
+        self._display()
 
 
-    def display(self):
+    def _display(self):
         # display the means
         print("Stocking by Species and Product (per acre) .... \n")
         for row in self.means:
