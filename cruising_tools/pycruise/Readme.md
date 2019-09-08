@@ -41,7 +41,7 @@ on your machine is 'C:\path\pycruise', then the Python REPL should be run from t
 ```
 >>> from pycruise import PointSample
 >>> ps = PointSample('pycruise/pt_data.csv')  # create a PointSample instance
->>> ps.dope_out()							  # run the calculations
+>>> ps.calculate()			      # run the calculations
 	What is the basal area factor? > 10
 	
 	Stocking by Species and Product (per acre) ...
