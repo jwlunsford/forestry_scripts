@@ -1,7 +1,7 @@
 # FIA DB API
 
-This project includes a python module with scripts to access the *[USDA FIA Database
-API*](https://www.fia.fs.fed.us/tools-data/).  The code has an object called
+This project includes a python module with scripts to access the [USDA FIA Database
+API](https://www.fia.fs.fed.us/tools-data/).  The code has an object called
 EvalidatorQuery which is used to access the server.
 
 [Database Documentation FIADB 8.0 Phase2](https://www.fia.fs.fed.us/library/database-documentation/index.php)
