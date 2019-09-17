@@ -106,12 +106,13 @@ if __name__ == '__main__':
 
     # query the PLOT ref table.
     qrywhere = 'COUNTYCD=347 AND INVYR=2018'
-    result2 = qry.ref_table_request('PLOT', 'COUNTYCD, PLOT', qrywhere)
+    result2 = qry.ref_table_request('COND', 'COUNTYCD, PLOT, TRTCD1, TRTCD2, TRTCD3', qrywhere)
     qry.print_api_response(result2.json())
-    # create a list of plots
-    plots = []
+    # create a set of plot numbers
+    plots = set()
     for record in result2.json()['FIADB_SQL_Output']['record']:
-        plots.append(record['PLOT'])
+        plots.add(record['PLOT'])
+    print(plots)
 
 
 
