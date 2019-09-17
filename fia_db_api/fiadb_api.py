@@ -7,7 +7,8 @@ class EvalidatorQuery:
         self.base_url = url
 
     def eval_group_request(self, state_code=48):
-        '''Configure an evalgrp GET request for a particular state.
+        '''Configure an evalgrp GET request for a particular state to print
+        out evaluations by year.
 
         Args:
             state_code (int): state code parameter, detault=48 (Texas)
@@ -35,9 +36,8 @@ class EvalidatorQuery:
         Args:
             table (str): a valid FIADB table name
             cols (str): table column names separated by commas.
-            state_code (int): state code parameter, default=48 (Texas)
-            county_code (int): county code parameter, default=347
-                               (Nacogdoches)
+            state_code (int): state code parameter
+            county_code (int): county code parameter
 
         Returns:
             result (object) - response object from request
@@ -61,7 +61,7 @@ class EvalidatorQuery:
 
 
     def print_api_response(self, obj):
-        '''prints the response object returned by an API request
+        '''Prints the response object returned by an API request
 
             Args:
                 obj (string): json response object returned by requests
@@ -74,7 +74,7 @@ class EvalidatorQuery:
 
 
     def _send_get_request(self, url, params=None):
-        '''send a GET request to the url, with default params = None.
+        '''Send a GET request to the url, with default params = None.
 
             Args:
                 url (str): url string formatted
