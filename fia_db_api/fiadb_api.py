@@ -7,28 +7,60 @@ class EvalidatorQuery:
         self.base_url = url
 
     def eval_group_request(self, state_code=48):
-        '''Configure an evalgrp GET request.
+        '''Configure an evalgrp GET request for a particular state.
 
         Args:
-            state_code (int): state code parameter, detault = 48 (Texas)
+            state_code (int): state code parameter, detault=48 (Texas)
 
         Returns:
-            None - prints API results to the standard output
+            result (object) - response object from request
         '''
         url = self.base_url + "evalgrp"
 
         parameters = {
             'schemaName': 'FS_FIADB',
-            'whereClause': 'statecd = 48',
+            'whereClause': 'statecd=' + str(state_code),
             'mostRecent=': 'Y'
         }
 
+        # send GET request
         result = self._send_get_request(url, parameters)
-        print(f'Status Code: {result[0]}')
-        self._print_api_response(result[1].json())
+
+        return result
 
 
-    def _print_api_response(self, obj):
+    def ref_table_request(self, table, cols, where):
+        '''Configure a table GET request for a particular state and county.
+
+        Args:
+            table (str): a valid FIADB table name
+            cols (str): table column names separated by commas.
+            state_code (int): state code parameter, default=48 (Texas)
+            county_code (int): county code parameter, default=347
+                               (Nacogdoches)
+
+        Returns:
+            result (object) - response object from request
+        '''
+        if cols is None or table is None:
+            print("Please provide a value for all inputs when calling ref_table_request().")
+        else:
+            url = self.base_url + "refTable"
+
+            parameters = {
+                'tableName': str(table),
+                'colList': str(cols),
+                'whereStr': str(where),
+                'outputFormat': 'JSON'
+            }
+
+            # send GET request
+            result = self._send_get_request(url, parameters)
+
+        return result
+
+
+    def print_api_response(self, obj):
         '''prints the response object returned by an API request
 
             Args:
@@ -49,22 +81,37 @@ class EvalidatorQuery:
                 params (dict): dictionary of parameters to pass with GET request
 
             Returns:
-                status_code, response (tuple): status code and response object
+                response (object): response object returned from request
         '''
         if not params:
             response = requests.get(url)
         else:
             response = requests.get(url, params=params)
 
-        return response.status_code, response
+        if response.status_code != 200:
+            # invalid response
+            return None
+
+        return response
 
 
 
 if __name__ == '__main__':
     url_str = "https://apps.fs.usda.gov/Evalidator/rest/Evalidator/"
     qry = EvalidatorQuery(url_str)
-    qry.eval_group_request()
 
+    # get a list of eval groups for TEXAS (default STATECD=48)
+    result = qry.eval_group_request()
+    qry.print_api_response(result.json())
+
+    # query the PLOT ref table.
+    qrywhere = 'COUNTYCD=347 AND INVYR=2018'
+    result2 = qry.ref_table_request('PLOT', 'COUNTYCD, PLOT', qrywhere)
+    qry.print_api_response(result2.json())
+    # create a list of plots
+    plots = []
+    for record in result2.json()['FIADB_SQL_Output']['record']:
+        plots.append(record['PLOT'])
 
 
 
