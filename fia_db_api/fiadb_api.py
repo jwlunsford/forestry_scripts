@@ -1,10 +1,10 @@
 import requests
 import json
 
-class EvalidatorQuery:
+class FIAQuery:
 
-    def __init__(self, url):
-        self.base_url = url
+    def __init__(self):
+        self.base_url = "https://apps.fs.usda.gov/Evalidator/rest/Evalidator/"
 
     def eval_group_request(self, state_code=48):
         '''Configure an evalgrp GET request for a particular state to print
@@ -42,7 +42,7 @@ class EvalidatorQuery:
         Returns:
             result (object) - response object from request
         '''
-        if cols is None or table is None:
+        if cols is None or table is None or where is None:
             print("Please provide a value for all inputs when calling ref_table_request().")
         else:
             url = self.base_url + "refTable"
@@ -97,22 +97,23 @@ class EvalidatorQuery:
 
 
 if __name__ == '__main__':
-    url_str = "https://apps.fs.usda.gov/Evalidator/rest/Evalidator/"
-    qry = EvalidatorQuery(url_str)
+    qry = FIAQuery()
 
-    # get a list of eval groups for TEXAS (default STATECD=48)
+    # EXAMPLE WORKFLOW
+    # 1.  get a list of eval groups for TEXAS (default STATECD=48)
     result = qry.eval_group_request()
     qry.print_api_response(result.json())
 
-    # query the PLOT ref table.
+    # 2.  query the PLOT ref table based on the 482018 evalgrp
     qrywhere = 'COUNTYCD=347 AND INVYR=2018'
     result2 = qry.ref_table_request('COND', 'COUNTYCD, PLOT, TRTCD1, TRTCD2, TRTCD3', qrywhere)
     qry.print_api_response(result2.json())
-    # create a set of plot numbers
-    plots = set()
+
+    # 3.  put the resulting plot data into a list of dictionaries
+    plots = list()
     for record in result2.json()['FIADB_SQL_Output']['record']:
-        plots.add(record['PLOT'])
-    print(plots)
+        print(record)
+        plots.append(record)
 
 
 
