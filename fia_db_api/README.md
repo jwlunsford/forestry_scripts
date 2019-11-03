@@ -17,9 +17,11 @@ The current version of this tool requires the following modules.
 
   The following workflow should be run from a Python REPL.
 
-  Create a query object
+  Import the FIAQuery class and create an instance of the query object.
 
   ```python
+  from fiadb_api import FIAQuery
+
   qry = FIAQuery()
   ```
 
