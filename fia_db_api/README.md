@@ -15,7 +15,7 @@ The current version of this tool requires the following modules.
 
 ## Example Workflow
 
-  # create a query object
+  Create a query object
 
   ```python
   qry = FIAQuery()
