@@ -15,6 +15,8 @@ The current version of this tool requires the following modules.
 
 ## Example Workflow
 
+  The following workflow should be run from a Python REPL.
+
   Create a query object
 
   ```python
