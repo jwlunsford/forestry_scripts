@@ -18,20 +18,20 @@ The current version of this tool requires the following modules.
   # create a query object
   qry = FIAQuery()
 
-  # Query 1:  get a list of eval groups for TEXAS (default STATECD=48)
-  result = qry.eval_group_request()
-  qry.print_api_response(result.json())
+  Query 1:  get a list of eval groups for TEXAS (default STATECD=48)
+  `result = qry.eval_group_request()
+  qry.print_api_response(result.json())`
 
-  # Query 2:  get the PLOT ref table based on the evalgrp '482018'
-  qrywhere = 'COUNTYCD=347 AND INVYR=2018'
+  Query 2:  get the PLOT ref table based on the evalgrp '482018'
+  `qrywhere = 'COUNTYCD=347 AND INVYR=2018'
   result2 = qry.ref_table_request('COND', 'COUNTYCD, PLOT, TRTCD1, TRTCD2, TRTCD3', qrywhere)
-  qry.print_api_response(result2.json())
+  qry.print_api_response(result2.json())`
 
-  # put the resulting plot data into a list of dictionaries
-  plots = list()
+  Put the resulting plot data into a list of dictionaries
+  `plots = list()
   for record in result2.json()['FIADB_SQL_Output']['record']:
       print(record)
-      plots.append(record)
+      plots.append(record)`
 
 ## Created By:
 
