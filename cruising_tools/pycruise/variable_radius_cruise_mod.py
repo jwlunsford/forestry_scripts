@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 import sys
-from .yield_eqs.pmrc import pmrc_ucp_tons, pmrc_lcp_tons
+from .yield_eqs.yield_functions import pmrc_ucp_tons, pmrc_lcp_tons,
+    gfc79_loblolly, gfc60_hard_hardwood
 
 '''This module calculates variable radius point sampling cruise data.
    Point data are input into a CSV file in the local directory and
