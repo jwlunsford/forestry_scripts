@@ -3,8 +3,7 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 import sys
-from .yield_eqs.yield_functions import pmrc_ucp_tons, pmrc_lcp_tons,
-    gfc79_loblolly, gfc60_hard_hardwood
+from yield_eqs.yield_functions import pmrc_ucp_tons, pmrc_lcp_tons, gfc79_loblolly, gfc60_hard_hardwood
 
 '''This module calculates variable radius point sampling cruise data.
    Point data are input into a CSV file in the local directory and
@@ -23,14 +22,15 @@ class PointSample:
     def __init__(self, path):
         self.path = path
         self.dframes = {}
-        self.plots = 0
+        self.plots = None
         self.means = []
         self.stats = []
 
 
     def calculate(self):
         # get the baf from the user
-        baf = int(input("What is the Basal Area Factor? > "))
+        # baf = int(input("What is the Basal Area Factor? > "))
+        baf = 20
 
         # run the calculations and display the results
         self._gen_df(self.path)
@@ -53,8 +53,9 @@ class PointSample:
 
         # display the stats
         print("Per acre Stats ....\n")
+        # print(self.stats)
         for label, value in self.stats:
-            print("{0:<18s}: {1:6.2f}".format(label, value))
+            print(f'{label}: {value}')
 
 
     def _gen_df(self, path_to_csv):
@@ -72,14 +73,13 @@ class PointSample:
         # accepts a newly created dataframe from the csv data and
         # appends additional values to the dataframe
         try:
-            # determine the number of unique plots
-            plot_count = 0
-            for n in df.PLT.unique():
-                plot_count += 1
-            self.plots = plot_count
 
             # df references the raw_df, make a copy so it is left unchanged
             calc_df = df.copy()
+
+            # determine the number of unique plots
+            plots = calc_df[['STD', 'PLT']].groupby(['STD']).nunique()
+            self.plots = plots['PLT']
 
             # create new data columns on the raw dataframe
             # BAT = basal area per tree
@@ -91,9 +91,10 @@ class PointSample:
             calc_df.insert(5, "BAT", np.power(calc_df.DBH, 2) * 0.00545415)
             calc_df.insert(6, "PAE", (baf/calc_df.BAT))
             calc_df.insert(7, "TPA", calc_df.PAE)
-            calc_df.insert(8, "VOL", pmrc_ucp_tons(calc_df.DBH, calc_df.THT))
-            calc_df.insert(9, "VPA", calc_df.VOL * calc_df.TPA)
-            calc_df.insert(10, "BAPA", baf)
+            calc_df.insert(8, "BAPA", baf)
+
+            calc_df['VOL'] = calc_df.apply(lambda row: self._calc_tons(row['PRD'], row['DBH'], row['THT']), axis=1)
+            calc_df['VPA'] = calc_df.VOL * calc_df.TPA
 
             # store the calc dataframe in self.dframes dict
             self.dframes["calc_df"] = calc_df
@@ -105,6 +106,19 @@ class PointSample:
             sys.exit(1)
 
 
+    def _calc_tons(self, prd, dbh, tht):
+        # calculate tons based on product
+        if prd == 'PPW':
+            return pmrc_ucp_tons(dbh, tht)
+        elif prd == 'CNS':
+            return pmrc_ucp_tons(dbh, tht, 5)
+        elif prd == 'PSL':
+            return pmrc_ucp_tons(dbh, tht, 7)
+        elif prd == 'HPW':
+            return gfc60_hard_hardwood(dbh, tht, 4)
+        else:
+            return gfc60_hard_hardwood(dbh, tht, 9)
+
 
     def _sum_data(self, df):
         # accepts a calc dataframe, groups by spp/product
@@ -115,7 +129,21 @@ class PointSample:
             # group by products and aggregate per acre values
             # have to divide these by plot count
             grp = out_df[["STD", "PRD", "TPA", "VPA","BAPA"]].groupby(
-                ["STD", "PRD"]).sum()/self.plots
+                ["STD", "PRD"]).sum()
+
+            # divide each row by value in plots list
+            stds = list(zip(self.plots.index, self.plots))   # a list of tuples
+            stands = []
+            for idx, n in stds:
+                slc = grp.loc[(idx, ), :].divide(n)
+                prds = slc.index.values
+                slc.reset_index()
+                slc['PRD'] = prds
+                slc['STD'] = idx
+                stands.append(slc)
+            # recombine stands into grp
+            grp = pd.concat(stands)
+            grp = grp.set_index(['STD', 'PRD'])
 
             # create a summary dict of values SPP, PRD, TPA, VPA, BAPA
             # for each species-product combination.
@@ -141,6 +169,8 @@ class PointSample:
 
     def _calc_stats(self, df): # CHANGE CALS BY STAND
 
+        #NEED TO LOOK AT THIS CODE FOR MULTI STANDS
+
         # accepts a calc dataframe, groups by plot, and return a Dict of stats
 
         # df refrences calc_df, which we want to leave unchanged, make a copy
@@ -149,7 +179,7 @@ class PointSample:
         # group by plot
         grp = dfs.groupby(["PLT"]).sum()
 
-        # insert a new column with squared VPA values
+        # insert a new column with squared VPA values, col was 9 now 11
         grp.insert(9, "VPA2", np.power(grp.VPA, 2))
 
         # sum VPA (this is sumX)
@@ -165,10 +195,10 @@ class PointSample:
         sumX2 = grp["VPA2"].sum()
 
         # summary basal area per acre
-        t_BA = grp["BAPA"].sum() / self.plots
+        t_BA = grp["BAPA"].sum() / self.plots.values[0] # extract series value
 
         # summary trees per acre
-        t_TPA = grp["TPA"].sum() / self.plots
+        t_TPA = grp["TPA"].sum() / self.plots.values[0] # extract series value
 
         # STATS.....
         # calc STD, SX, SE%, CV%
@@ -192,14 +222,14 @@ class PointSample:
                      ("Std. Error", std_error), ("CV%", cv_pct),
                      ("Sampling Error", smp_error)]
 
+
         self.stats = stat_list
 
 
 
 if __name__ == '__main__':
     # create  a PointSample class, run the calculations and print results
-    ps = PointSample(sys.argv[1])
-    ps.run()
-    ps.stats()
+    ps = PointSample('pt_data_mod.csv')
+    ps.calculate()
 
 
